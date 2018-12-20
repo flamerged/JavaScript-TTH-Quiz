@@ -10,6 +10,7 @@ function print(message) {
 }
 
 var answeredRight = [];
+var answeredWrong = [];
 var correctAnswers = 0;
 var html = "";
                  
@@ -19,38 +20,26 @@ for (var i = 0; i < questions.length; i++) {
         correctAnswers++;
         answeredRight[i] = true;
        } else {
-          answeredRight[i] = false;
+          answeredWrong[i] = true;
        }
     }
 
-function buildCorrectList(array) {
-  var correctlyAnsweredHTML = "<ol>";
+function buildList(array) {
+  var answersHTML = "<ol>";
   for (var i = 0; i < array.length; i++) {
     if (array[i] === true) {
-     correctlyAnsweredHTML +="<li>" + questions[i][0] + "</li>";
+     answersHTML +="<li>" + questions[i][0] + "</li>";
     }
   }
-  correctlyAnsweredHTML += "</ol>";
-  return correctlyAnsweredHTML;
+  answersHTML += "</ol>";
+  return answersHTML;
 }
-
-function buildWrongList(array) {
-  var wronglyAnsweredHTML = "<ol>";
-  for (var i = 0; i < array.length; i++) {
-    if (array[i] === false) {
-     wronglyAnsweredHTML +="<li>" + questions[i][0] + "</li>";
-    }
-  }
-  wronglyAnsweredHTML += "</ol>";
-  return wronglyAnsweredHTML;
-}
-
 
 
 html += "<p>You answered " + correctAnswers + " questions correctly</p><br>";
 html += "<h2>You answered correctly: </h2>";
-html += buildCorrectList(answeredRight);
+html += buildList(answeredRight);
 html += "<h2>You answered wrongly: </h2>";
-html += buildWrongList(answeredRight);
+html += buildList(answeredWrong);
 
 print(html);
